@@ -1,0 +1,597 @@
+<html>
+<head>
+    <title>Learn More About TEJAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://i.imgur.com/WvzP1S4.png" rel="icon" type="image/png"/>
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        .active {
+            background-color: #3b3c3c;
+        }
+        .sidebar-link {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar-link:hover {
+            background-color: #3b3c3c;
+            color: #ffffff;
+        }
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .contact-box {
+            background-color: #3b3c3c;
+            border: 1px solid white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+        .contact-box h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .contact-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-box ul li {
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        .contact-box ul li a {
+            color: white;
+            text-decoration: underline;
+        }
+        .contact-box ul li a:hover {
+            text-decoration: none;
+            color: #ffcc00;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('main > section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('fade-in');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+
+            const links = document.querySelectorAll('aside nav ul li a');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`a[href="javascript:void(0);"][onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('introduction');
+        });
+    </script>
+</head>
+<body class="bg-[#161717] text-white">
+    <div class="min-h-screen flex">
+        <aside class="w-64 bg-[#2a2b2b] p-4 shadow-md">
+            <nav class="sticky top-0">
+                <div class="flex items-center mb-4">
+                    <img alt="AI logo with a brain and circuit design" class="w-8 h-8 mr-2" src="https://i.imgur.com/WvzP1S4.png"/>
+                    <h2 class="text-xl font-bold text-white">Documentation</h2>
+                </div>
+                <ul class="space-y-2">
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('introduction')">
+                            <span class="mr-2">1</span>
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Features
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('getting-started')">
+                            <span class="mr-2">2</span>
+                            <i class="fas fa-play-circle mr-2"></i>
+                            Getting Started
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('how-it-works')">
+                            <span class="mr-2">3</span>
+                            <i class="fas fa-cogs mr-2"></i>
+                            How it Works
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('use-cases')">
+                            <span class="mr-2">4</span>
+                            <i class="fas fa-briefcase mr-2"></i>
+                            Use Cases
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('faq')">
+                            <span class="mr-2">5</span>
+                            <i class="fas fa-question-circle mr-2"></i>
+                            FAQ
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('our-team')">
+                            <span class="mr-2">6</span>
+                            <i class="fas fa-users mr-2"></i>
+                            Our Team
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center text-gray-300 hover:text-white sidebar-link" href="javascript:void(0);" onclick="showSection('contact-feedback')">
+                            <span class="mr-2">7</span>
+                            <i class="fas fa-envelope mr-2"></i>
+                            Contact and Feedback
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="flex-1 p-8">
+            <header class="mb-8 fade-in">
+                <h1 class="text-4xl font-bold text-white">Learn More About TEJAI</h1>
+                <p class="text-lg text-gray-400 mt-2">Discover more about TEJAI</p>
+            </header>
+            <main class="max-w-4xl bg-[#212224] p-8 rounded-lg shadow-md main-content">
+                <section class="mb-8 p-8 rounded-lg" id="introduction" style="background-color: #3b3c3c;">
+                    <h2 class="text-2xl font-semibold text-white mb-4 text-center">Features</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                        <!-- Point 1 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-comment-dots text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Seamless Written Chats</p>
+                        </div>
+                
+                        <!-- Point 2 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-microphone text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Interactive Voice Conversations</p>
+                        </div>
+                
+                        <!-- Point 3 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-palette text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">AI-Powered Image Generation</p>
+                        </div>
+                
+                        <!-- Point 4 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-desktop text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Web Version Accessibility</p>
+                        </div>
+                
+                        <!-- Point 5 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-mobile-alt text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">APK for Android Use</p>
+                        </div>
+                
+                        <!-- Point 6 -->
+                        <div class="flex flex-col items-center p-4 rounded-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                            <i class="fas fa-headset text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">24/7 Support</p>
+                        </div>
+                    </div>
+                </section>                
+                <section class="mb-8 hidden" id="getting-started">
+                    <h2 class="text-2xl font-semibold text-white mb-4">Getting Started</h2>
+                    <p class="text-gray-300">
+                        This section will guide you through the initial steps to get started with AI. You will learn about the fundamental concepts and tools required to begin your journey in AI.
+                    </p>
+                </section>
+                <section class="mb-8 p-8 rounded-lg" id="how-it-works" style="background-color: #3b3c3c;">
+                    <h2 class="text-2xl font-semibold text-white mb-4 text-center">How It Works</h2>
+                    <p class="text-gray-300 text-center mb-6">
+                        Discover how AI processes user input, analyzes it, and generates intelligent responses using advanced algorithms and machine learning models.
+                    </p>
+                
+                    <!-- Flowchart Container -->
+                    <div class="relative flex flex-col items-center justify-center space-y-16">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">User Input</h3>
+                                <p class="text-gray-300 text-sm">Text, voice, or image data provided by the user.</p>
+                            </div>
+                            <div class="text-gray-300 text-3xl mt-2">⬇️</div>
+                        </div>
+                
+                        <!-- Step 2 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">Preprocessing</h3>
+                                <p class="text-gray-300 text-sm">AI cleans and processes the input data for analysis.</p>
+                            </div>
+                            <div class="text-gray-300 text-3xl mt-2">⬇️</div>
+                        </div>
+                
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">AI Model Analysis</h3>
+                                <p class="text-gray-300 text-sm">Machine learning models identify patterns and extract meaning.</p>
+                            </div>
+                            <div class="text-gray-300 text-3xl mt-2">⬇️</div>
+                        </div>
+                
+                        <!-- Step 4 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">Decision Making</h3>
+                                <p class="text-gray-300 text-sm">AI uses algorithms to make predictions or decisions.</p>
+                            </div>
+                            <div class="text-gray-300 text-3xl mt-2">⬇️</div>
+                        </div>
+                
+                        <!-- Step 5 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">Response Generation</h3>
+                                <p class="text-gray-300 text-sm">AI crafts a response tailored to the user's request.</p>
+                            </div>
+                            <div class="text-gray-300 text-3xl mt-2">⬇️</div>
+                        </div>
+                
+                        <!-- Step 6 -->
+                        <div class="flex flex-col items-center">
+                            <div class="p-4 rounded-lg shadow-lg bg-gray-800 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-white">
+                                <h3 class="text-white font-semibold">User Feedback</h3>
+                                <p class="text-gray-300 text-sm">The user receives the response and can provide feedback for improvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>                                
+                <section class="mb-8 p-8 rounded-lg" id="use-cases">
+                    <h2 class="text-2xl font-semibold text-white mb-4">Use Cases</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-stethoscope text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Healthcare</p>
+                            <p class="text-gray-300">AI is used for diagnosing diseases and personalizing treatment plans.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-dollar-sign text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Finance</p>
+                            <p class="text-gray-300">AI helps in fraud detection and algorithmic trading.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-car text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Transportation</p>
+                            <p class="text-gray-300">Self-driving cars and traffic management systems.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-robot text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Customer Service</p>
+                            <p class="text-gray-300">Chatbots and virtual assistants.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-play text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Entertainment</p>
+                            <p class="text-gray-300">Personalized recommendations and content creation.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-store text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Retail</p>
+                            <p class="text-gray-300">AI enhances inventory management and personalized shopping experiences.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-industry text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Manufacturing</p>
+                            <p class="text-gray-300">AI optimizes production lines and predicts equipment maintenance needs.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-globe text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Environmental Science</p>
+                            <p class="text-gray-300">AI monitors climate change and manages natural resources efficiently.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-school text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Education</p>
+                            <p class="text-gray-300">AI powers personalized learning platforms and virtual tutors.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-search text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Research</p>
+                            <p class="text-gray-300">AI accelerates data analysis and discovery in various scientific fields.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-shield-alt text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Cybersecurity</p>
+                            <p class="text-gray-300">AI detects and mitigates cyber threats effectively.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-home text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Smart Homes</p>
+                            <p class="text-gray-300">AI automates home systems for convenience and energy efficiency.</p>
+                        </div>
+                    </div>
+                </section>                
+                <section class="mb-8 p-8 rounded-lg" id="faq">
+                    <h2 class="text-2xl font-semibold text-white mb-4">FAQ</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-brain text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What is AI?</p>
+                            <p class="text-gray-300">AI stands for Artificial Intelligence, which refers to systems designed to mimic human intelligence.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-mobile-alt text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">How is AI used in daily life?</p>
+                            <p class="text-gray-300">AI powers virtual assistants, recommendation systems, navigation apps, and more.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-shield-alt text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Is AI safe to use?</p>
+                            <p class="text-gray-300">Yes, when implemented responsibly, AI systems prioritize user safety and privacy.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-robot text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Can AI replace human jobs?</p>
+                            <p class="text-gray-300">AI can automate tasks, but it often creates new job opportunities as well.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-book text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">How do I learn about AI?</p>
+                            <p class="text-gray-300">Start with online courses, tutorials, and beginner-friendly programming languages.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-cogs text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What are the types of AI?</p>
+                            <p class="text-gray-300">AI can be categorized into narrow AI, general AI, and super AI based on its capabilities.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-laptop-code text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What programming languages are used in AI?</p>
+                            <p class="text-gray-300">Popular languages include Python, R, Java, and C++ due to their rich libraries and frameworks.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-question-circle text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What is machine learning?</p>
+                            <p class="text-gray-300">Machine learning is a subset of AI that enables systems to learn and improve from experience.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-cogs text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What is Deep Learning?</p>
+                            <p class="text-gray-300">Deep Learning is a type of Machine Learning that uses neural networks to analyze large amounts of data.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-network-wired text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What are neural networks?</p>
+                            <p class="text-gray-300">Neural networks are algorithms inspired by the structure of the human brain, used for pattern recognition.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-search text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">How does AI process data?</p>
+                            <p class="text-gray-300">AI processes data through algorithms, identifying patterns, and learning from large datasets.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-user-shield text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">How does AI ensure privacy?</p>
+                            <p class="text-gray-300">AI ensures privacy with techniques like encryption, differential privacy, and anonymization of data.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-users text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Can anyone use AI?</p>
+                            <p class="text-gray-300">Yes, many AI-powered tools are user-friendly and accessible to non-technical users.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-tools text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">What tools are available for AI development?</p>
+                            <p class="text-gray-300">Popular tools include TensorFlow, PyTorch, scikit-learn, and cloud-based AI services.</p>
+                        </div>
+                        <div class="flex flex-col items-center p-4 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white">
+                            <i class="fas fa-graduation-cap text-4xl text-white mb-2"></i>
+                            <p class="text-lg font-bold text-white">Can AI help in education?</p>
+                            <p class="text-gray-300">Yes, AI enables personalized learning, automated grading, and access to virtual tutors.</p>
+                        </div>
+                    </div>
+                </section>                                
+                <section class="mb-8 p-8 rounded-lg" id="our-team" style="background-color: #3b3c3c;">
+                    <div class="space-y-8">
+                        <!-- Developers Section -->
+                        <div class="p-6 rounded-lg shadow-lg border border-white hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-white">
+                            <h2 class="text-2xl font-semibold text-white mb-4">Developers</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="flex flex-col items-center text-center">
+                                    <img alt="Photo of Md Ajmayeen Intisar Mahee in a circular frame with a soft glow effect"
+                                        class="w-48 h-48 rounded-full mb-4 hover:shadow-lg hover:shadow-white transition-shadow duration-300"
+                                        height="200"
+                                        src="https://i.ibb.co.com/3WbT8t2/Screenshot-2025-01-26-213402.png"
+                                        width="200" />
+                                    <h3 class="text-xl font-bold text-white">Md Ajmayeen Intisar Mahee</h3>
+                                    <p class="text-lg text-gray-300">Front-end Developer</p>
+                                    <ul class="text-gray-300 mt-2">
+                                        <li>Illustration and Graphics Specialist</li>
+                                        <li>Hardware & Robotics Developer</li>
+                                        <li>Chief Student Representative, NGHS</li>
+                                    </ul>
+                                </div>
+                                <div class="flex flex-col items-center text-center">
+                                    <img alt="Photo of Hisham Sardar Ebon in a circular frame with a soft glow effect"
+                                        class="w-50 h-48 rounded-full mb-4 hover:shadow-lg hover:shadow-white transition-shadow duration-300"
+                                        height="200"
+                                        src="https://i.ibb.co.com/1b1SPXN/Screenshot-2025-01-26-214034.png"
+                                        width="200" />
+                                    <h3 class="text-xl font-bold text-white">Hisham Sardar Ebon</h3>
+                                    <p class="text-lg text-gray-300">Back-end Developer</p>
+                                    <ul class="text-gray-300 mt-2">
+                                        <li>Git-Hub & Api Specialist</li>
+                                        <li>Artificial Intelligence Researcher</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Logistic Support Section -->
+                        <div class="p-6 rounded-lg shadow-lg border border-white hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-white">
+                            <h2 class="text-2xl font-semibold text-white mb-4">Logistic Support By:</h2>
+                            <div class="flex flex-row items-center justify-center gap-16">
+                                <!-- First Information -->
+                                <div class="flex flex-col items-center text-center">
+                                    <img alt="Photo of Safiur Rahman Sohel in a circular frame with a soft glow effect"
+                                        class="w-48 h-48 rounded-full mb-4 hover:shadow-lg hover:shadow-white transition-shadow duration-300"
+                                        height="200"
+                                        src="https://i.ibb.co.com/pvhrVL9/Screenshot-2025-01-25-160603.png"
+                                        width="200" />
+                                    <h3 class="text-xl font-bold text-white">Safiur Rahman Sohel</h3>
+                                    <p class="text-lg text-gray-300">Science Teacher, NGHS</p>
+                                </div>
+                        
+                                <!-- Additional Information -->
+                                <div class="flex flex-col items-center text-center">
+                                    <img alt="Logo of Science CaFe with SOHEL SiR"
+                                        class="w-60 h-48 mb-4 hover:shadow-lg hover:shadow-white transition-shadow duration-300"
+                                        height="200"
+                                        src="https://i.ibb.co.com/S5P89cK/logo-png.png"
+                                        width="200" />
+                                    <h3 class="text-xl font-bold text-white">Science CaFe with SOHEL SiR</h3>
+                                </div>                                
+                            </div>
+                        </div>                                                               
+                        <!-- Financial Support Section -->
+                        <div class="p-6 rounded-lg shadow-lg border border-white hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-white">
+                            <h2 class="text-2xl font-semibold text-white mb-4">Financial Support By:</h2>
+                            <div class="flex flex-col items-center text-center">
+                                <img alt="Photo of Nilphamari Govt. High School Authority in a circular frame with a soft glow effect"
+                                    class="w-48 h-48 rounded-full mb-4 hover:shadow-lg hover:shadow-white transition-shadow duration-300"
+                                    height="200"
+                                    src="https://i.imghippo.com/files/BjKt7604wg.png"
+                                    width="200" />
+                                <h3 class="text-xl font-bold text-white">Nilphamari Govt. High School Authority</h3>
+                            </div>
+                        </div>
+                    </div>
+                </section>                
+                <section class="mb-8 p-8 rounded-lg" id="contact-feedback" style="background-color: #3b3c3c;">
+                    <h2 class="text-2xl font-semibold text-white mb-8 text-center">Contact & Feedback</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8">
+                        
+                        <!-- Box 1 -->
+                        <div class="p-6 rounded-lg shadow-lg bg-gray-800 text-white transition transform hover:scale-105 hover:shadow-2xl">
+                            <h3 class="text-xl font-semibold mb-4">TejAi Support Sector</h3>
+                            <ul class="space-y-2">
+                                <li>
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <a href="mailto:support@tejintelligence.com" class="underline hover:text-gray-400">support@tejintelligence.com</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-discord mr-2"></i>
+                                    <a href="https://discord.com/channels/@tejai_technical_support" target="_blank" class="underline hover:text-gray-400">Discord</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Box 2 -->
+                        <div class="p-6 rounded-lg shadow-lg bg-gray-800 text-white transition transform hover:scale-105 hover:shadow-2xl">
+                            <h3 class="text-xl font-semibold mb-4">Md Ajmayeen Intisar Mahee</h3>
+                            <ul class="space-y-2">
+                                <li>
+                                    <i class="fas fa-phone mr-2"></i>
+                                    <a href="tel:+8801789069208" class="underline hover:text-gray-400">+8801789069208</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    <a href="https://wa.me/8801326589224" target="_blank" class="underline hover:text-gray-400">+8801326589224</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-facebook mr-2"></i>
+                                    <a href="https://www.facebook.com/masterthejoker" target="_blank" class="underline hover:text-gray-400">Facebook</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-instagram mr-2"></i>
+                                    <a href="https://www.instagram.com/ai_mahee_thejoker/" target="_blank" class="underline hover:text-gray-400">Instagram</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-telegram mr-2"></i>
+                                    <a href="https://t.me/8801326589224" target="_blank" class="underline hover:text-gray-400">Telegram</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <a href="mailto:masterthejoker777@gmail.com" class="underline hover:text-gray-400">masterthejoker777@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Box 3 -->
+                        <div class="p-6 rounded-lg shadow-lg bg-gray-800 text-white transition transform hover:scale-105 hover:shadow-2xl">
+                            <h3 class="text-xl font-semibold mb-4">Hisham Sardar Ebon</h3>
+                            <ul class="space-y-2">
+                                <li>
+                                    <i class="fas fa-phone mr-2"></i>
+                                    <a href="tel:+8801824885518" class="underline hover:text-gray-400">+8801824885518</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-facebook mr-2"></i>
+                                    <a href="https://www.facebook.com/HishamSardarEbon" target="_blank" class="underline hover:text-gray-400">Facebook</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-instagram mr-2"></i>
+                                    <a href="https://www.instagram.com/real.ebon/" target="_blank" class="underline hover:text-gray-400">Instagram</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <a href="mailto:hishamsardarebon@gmail.com" class="underline hover:text-gray-400">hishamsardarebon@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Box 4 -->
+                        <div class="p-6 rounded-lg shadow-lg bg-gray-800 text-white transition transform hover:scale-105 hover:shadow-2xl">
+                            <h3 class="text-xl font-semibold mb-4">Safiur Rahman Sohel</h3>
+                            <ul class="space-y-2">
+                                <li>
+                                    <i class="fas fa-phone mr-2"></i>
+                                    <a href="tel:+8801781029712" class="underline hover:text-gray-400">+8801781029712</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    <a href="https://wa.me/8801781029712" target="_blank" class="underline hover:text-gray-400">WhatsApp</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-facebook mr-2"></i>
+                                    <a href="https://www.facebook.com/safiur.sohel.9" target="_blank" class="underline hover:text-gray-400">Facebook</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-facebook mr-2"></i>
+                                    <a href="https://www.facebook.com/profile.php?id=61551516493339" target="_blank" class="underline hover:text-gray-400">Facebook Page</a>
+                                </li>
+                                <li>
+                                    <i class="fab fa-instagram mr-2"></i>
+                                    <a href="https://www.instagram.com/safiur_rahman_sohel/" target="_blank" class="underline hover:text-gray-400">Instagram</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <a href="mailto:safiurrahmansamit@gmail.com" class="underline hover:text-gray-400">safiurrahmansamit@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
