@@ -1,0 +1,25 @@
+{
+  "name": "tejai",
+  "version": "1.0.0",
+  "description": "TEJAI Chatbot",
+  "main": "script.js",
+  "scripts": {
+    "start": "npx http-server -p 8080",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "postinstall": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

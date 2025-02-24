@@ -1,0 +1,50 @@
+{
+  "version": 2,
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "public": true,
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "fonts/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/",
+      "dest": "/chatbot.html"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "/$1"
+    },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/dist/(.*)", "dest": "/dist/$1" },
+    { "src": "/(.*).js", "dest": "/$1.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

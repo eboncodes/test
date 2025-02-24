@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-[#121212] rounded-xl p-6 w-96 transform scale-95 opacity-0 transition-all duration-300">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold text-white">Share your feedback</h3>
+            <button id="closeReview" class="text-zinc-500 hover:text-white">
+                <i class="ri-close-line text-xl"></i>
+            </button>
+        </div>
+        
+        <textarea 
+            placeholder="Tell us what you think..."
+            class="w-full h-32 bg-[#1a1a1a] text-white rounded-lg p-3 mb-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm placeholder-zinc-600"
+        ></textarea>
+
+        <div class="flex justify-center gap-6 mb-6">
+            <button class="reaction-btn group">
+                <i class="ri-emotion-happy-line text-3xl text-zinc-500 group-hover:text-yellow-500 transition-colors"></i>
+            </button>
+            <button class="reaction-btn group">
+                <i class="ri-emotion-normal-line text-3xl text-zinc-500 group-hover:text-blue-500 transition-colors"></i>
+            </button>
+            <button class="reaction-btn group">
+                <i class="ri-emotion-unhappy-line text-3xl text-zinc-500 group-hover:text-red-500 transition-colors"></i>
+            </button>
+        </div>
+
+        <button id="sendFeedback" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 transition-colors">
+            Send Feedback
+        </button>
+    </div>
+</div>

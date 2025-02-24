@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orphion</title>
+    <link rel="icon" type="image/png" href="/images/Orphion-icon-png.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Remove tailwind CDN and config script -->
+    <style>
+        @font-face {
+            font-family: 'Geist';
+            src: url('./fonts/Geist-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BladeLogic';
+            src: url('./fonts/BladeLogicDemoRegular-ALnVD.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-text {
+            font-family: 'Geist', sans-serif;
+            font-weight: 700;  /* Make sure it's bold */
+            background: linear-gradient(
+                to right,
+                #FF99C8,  /* Light pink */
+                #A6C1EE,  /* Light blue */
+                #CAB6FE,  /* Light purple */
+                #89DCF6,  /* Light cyan */
+                #FF99C8   /* Back to light pink */
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: gradient 6s ease infinite; /* Slowed down to 6 seconds */
+        }
+
+        .gradient-text span {
+            font-family: 'BladeLogic', sans-serif;
+            font-size: 1.1em;
+        }
+
+        .sidebar-logo {
+            font-family: 'BladeLogic', sans-serif;
+            font-size: 48px; /* Increased from 28px */
+            color: white;
+            text-align: center;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #A6C1EE 0%, #CAB6FE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1.5rem 0; /* Increased margin for better spacing */
+        }
+
+        body {
+            overflow: hidden;
+            background-color: #0a0a0a;  /* Just keep the dark background */
+        }
+
+        .content-wrapper {
+            height: calc(100vh - 2rem);
+        }
+        .sidebar-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, #374151 90%, transparent 100%);
+            margin: 0.5rem 0;
+        }
+        .chat-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .chat-container::-webkit-scrollbar {
+            display: none;
+        }
+        .message-bubble {
+            max-width: 85%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            padding: 1rem;
+            margin: 0.375rem 0;
+            letter-spacing: -0.003em;
+            color: rgb(236, 236, 241);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .message-bubble:hover {
+            transform: translateY(-1px);
+        }
+        
+        .message-bubble > div {
+            width: fit-content;
+            max-width: 100%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .message-content {
+            width: 100%;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: calc(100% - 40px); /* Account for avatar */
+            font-family: 'Manrope', sans-serif; /* Default font for all messages */
+            white-space: pre-wrap; /* This preserves whitespace and wraps text */
+            word-wrap: break-word; /* Ensures long words don't overflow */
+        }
+
+        .message-content code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #e5e7eb;
+        }
+
+        .message-content .code-block {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            margin: 1rem 0;
+        }
+
+        .message-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-content strong {
+            font-weight: 600;
+        }
+
+        .message-content em {
+            font-style: italic;
+            color: #9ca3af;
+        }
+        
+        .copy-btn {
+            opacity: 1 !important; /* Override any existing opacity settings */
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        .copy-btn.copied {
+            color: #10B981; /* Green color to indicate success */
+        }
+
+        #messagesContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+        .user-message {
+            background: none;
+            border: none;
+            border-radius: 0;
+            margin-left: auto;
+            color: #e5e7eb;
+            padding: 0.5rem 0;
+            white-space: pre-wrap; /* This preserves whitespace and wraps text */
+        }
+        .ai-message {
+            background: transparent;
+            border-radius: 0;
+            color: #e5e7eb;
+            margin-right: auto;
+            border: none;
+            padding: 0.5rem 0;
+        }
+        /* Add these new animation styles */
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .page-transition {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* Add new loading animation styles */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid transparent;
+            border-top-color: #2563eb;
+            border-right-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        /* Update loading container styles */
+        .loading-container {
+            display: none;  /* Change from flex to none by default */
+            align-items: center;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: rgba(18, 18, 18, 0.8);
+            border-radius: 1rem;
+            padding: 0.75rem 1.25rem;
+            margin-left: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .loading-container.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Position loading spinner properly */
+        #loadingBubble {
+            position: relative;
+            margin-left: 2rem;  /* Add margin to align with AI messages */
+        }
+
+        /* Code block improvements */
+        .code-block {
+            background: rgb(0, 0, 0) !important;
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .code-block pre {
+            background: rgb(23, 23, 23);
+            padding: 1rem;
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        .code-block .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgb(23, 23, 23);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(86, 88, 105, 1);
+        }
+
+        /* Improved list styling */
+        .message-content ul {
+            list-style: none;
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .message-content li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 0.25rem 0;
+        }
+
+        .message-content li::before {
+            content: "•";
+            color: rgb(172, 172, 190);
+        }
+
+        /* Table styling */
+        .message-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .message-content th,
+        .message-content td {
+            border: 1px solid rgba(86, 88, 105, 1);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .message-content th {
+            background: rgba(52, 53, 65, 0.4);
+        }
+
+        /* Improved inline code */
+        .message-content code:not(pre code) {
+            background: rgb(23, 23, 23);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'Söhne Mono', Monaco, Andale Mono, Ubuntu Mono, monospace;
+        }
+
+        /* Definition list styling */
+        .definition-item dt {
+            font-size: 1.1em;
+            color: #e5e7eb;
+            position: relative;
+        }
+
+        .definition-item dd {
+            position: relative;
+            margin-left: 0;
+        }
+
+        .definition-item dd::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+            bottom: 0.5em;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1px;
+        }
+
+        /* Improved list styling */
+        .message-content ul {
+            list-style: none;
+            margin: 0.5rem 0;
+        }
+
+        .message-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .message-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0.25rem;
+            color: rgb(99, 102, 241);
+        }
+
+        /* Add new gradient styles for Bard icons */
+        .bard-gradient {
+            background: linear-gradient(135deg, #8EA5FE 0%, #BEB8FE 50%, #FFB8F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            transition: filter 0.3s ease;
+        }
+        
+        .bard-button {
+            transition: all 0.3s ease;
+        }
+        
+        .bard-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .bard-button:hover .bard-gradient {
+            filter: brightness(1.2);
+        }
+
+        /* Update spacing for AI message wrapper */
+        .ai-message-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            width: 100%;
+        }
+
+        /* Update avatar styling */
+        .ai-avatar {
+            width: 24px;
+            height: 24px;
+            margin-top: 0;  /* Remove top margin */
+            flex-shrink: 0;
+            position: relative;
+            top: -2px;  /* Move avatar up slightly */
+        }
+
+        /* Update the message content font - make it more specific */
+        .message-bubble .message-content,
+        .ai-message-wrapper .message-content {
+            font-family: 'Manrope', sans-serif !important;
+            width: 100%;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: calc(100% - 40px);
+        }
+
+        /* Also ensure that the input uses GeistMono */
+        input[type="text"],
+        input[type="search"],
+        textarea {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Update these specific selectors to target message content */
+        .user-message .message-content,
+        .ai-message-wrapper .message-content {
+            font-family: 'Manrope', sans-serif !important;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+        }
+
+        /* Update the input field to not use GeistMono */
+        input[type="text"],
+        input[type="search"],
+        textarea {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .suggestion-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Changed from center */
+            position: relative;
+            padding: 1rem; /* Added padding */
+            min-height: 200px; /* Set minimum height */
+        }
+
+        .suggestion-box p {
+            text-align: left; /* Changed from center */
+            margin: 0;
+            font-size: 0.95rem; /* Adjusted size */
+            line-height: 1.4;
+        }
+
+        .suggestion-box i {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem; /* Changed from left to right */
+            font-size: 1.75rem; /* Made icon slightly bigger */
+        }
+
+        /* Add these styles to your existing styles */
+        .web-search-enabled {
+            color: #3b82f6 !important; /* blue-500 */
+        }
+
+        #webSearchButton {
+            transition: color 0.3s ease;
+        }
+
+        #webSearchButton:hover {
+            color: #60a5fa; /* blue-400 */
+        }
+
+        #webSearchButton.text-blue-500 {
+            color: #3b82f6 !important;
+        }
+
+        /* Add this if you want a subtle glow effect when enabled */
+        #webSearchButton.text-blue-500 {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Add brain icon styles */
+        #brainButton {
+            transition: all 0.3s ease;
+        }
+
+        #brainButton.active {
+            color: #ef4444 !important; /* red-500 */
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        #brainButton:hover {
+            color: #f87171; /* red-400 */
+        }
+
+        /* Add these new styles after your existing styles */
+    
+        /* Enhanced Message Bubbles */
+        .message-bubble {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .message-bubble:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Frosted Glass Effect for Modals */
+        .modal-content {
+            backdrop-filter: blur(12px);
+            background: rgba(18, 18, 18, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Animated Gradient Border */
+        .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+            background: linear-gradient(60deg, #3b82f6, #8b5cf6, #ec4899);
+            padding: 1px;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            padding: 1px;
+            background: linear-gradient(60deg, #3b82f6, #8b5cf6, #ec4899);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            animation: borderRotate 4s linear infinite;
+        }
+        
+        @keyframes borderRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Improved Button Hover Effects */
+        .action-button {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .action-button:hover::after {
+            opacity: 1;
+        }
+        
+        /* Enhanced Input Field */
+        .message-input {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .message-input:focus-within {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+        }
+
+        .sources-list .source-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .sources-list .source-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .source-favicon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            flex-shrink: 0;
+        }
+
+        .sources-btn .source-icons img {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #121212;
+        }
+
+        .sources-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .source-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .source-favicon {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .source-link {
+            color: #60a5fa;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .source-link:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        @keyframes textFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .animate-flicker {
+            animation: textFlicker 1.5s ease-in-out infinite;
+        }
+    </style>
+    <script src="review.js"></script>
+    <!-- Add this meta tag to suppress source map warnings -->
+    <meta name="source-map" content="none">
+</head>
+<body class="bg-[#0a0a0a] font-manrope text-white">
+    <div class="flex h-screen">
+        <!-- Side Navigation -->
+        <nav id="sidebar" class="w-16 border-r border-zinc-800 flex flex-col py-6 transition-all duration-300 relative bg-[#0a0a0a]">
+            <div id="sidebarHeader" class="hidden w-full px-4 mb-6">
+                <div class="flex flex-col items-center gap-3">
+                    <h1 class="sidebar-logo">Orphion</h1>
+                </div>
+                <div class="sidebar-divider"></div>
+            </div>
+            <button id="sidebarToggle" class="self-center text-zinc-600 hover:text-white transition-all duration-300 ease-out mb-8">
+                <i class="ri-menu-line text-2xl transition-transform duration-300"></i>
+            </button>
+            <div class="flex flex-col gap-2 items-center">
+                <button class="sidebar-btn text-zinc-500 hover:text-white transition-all duration-300 ease-out flex items-center gap-3 w-full px-4 py-2 relative">
+                    <i class="ri-add-line text-xl"></i>
+                    <span class="hidden sidebar-text font-light tracking-wider">New chat</span>
+                </button>
+            </div>
+
+            <div class="mt-auto px-4">
+                <button id="ttsToggle" class="sidebar-btn text-zinc-500 hover:text-white transition-colors flex items-center w-full py-2 mb-2">
+                    <i class="ri-volume-up-line text-xl mx-auto"></i>
+                </button>
+                <div class="sidebar-divider"></div>
+                <div class="hidden sidebar-text flex items-center justify-between mb-1 mt-2"> <!-- Added mt-2 for better spacing -->
+                    <span class="text-xs text-zinc-500">Powered By</span>
+                    <img src="/images/logo white png.png" alt="Logo" style="height: 65px; width: 125px;">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 bg-[#0a0a0a] relative">
+            <!-- Replace the Deep-Think button HTML -->
+            <div class="absolute top-4 left-4">
+                <button id="deepThinkToggle" class="flex items-center gap-2 text-zinc-600 hover:text-white transition-all duration-300">
+                    <i class="ri-brain-line text-lg"></i>
+                    <span class="text-sm">Deep-Think</span>
+                </button>
+            </div>
+
+            <div class="absolute top-4 right-4">
+                <!-- Replace the bard button with explore button -->
+                <button id="exploreBtn" class="p-2 text-zinc-500 hover:text-white transition-colors">
+                    <i class="ri-compass-3-line text-2xl"></i>
+                </button>
+            </div>
+            <!-- Update the content-wrapper to center content vertically -->
+            <div class="content-wrapper flex flex-col justify-center max-w-5xl mx-auto"> <!-- Added justify-center here -->
+                <!-- Initial View - Update spacing between elements -->
+                <div id="initialView" class="space-y-12 transition-all duration-300 ease-in-out opacity-100 -mt-32">
+                    <!-- Update text alignment and spacing -->
+                    <div class="space-y-2 animate-slide-in text-left mb-16 max-w-4xl mx-auto"> <!-- Changed text-center to text-left -->
+                        <h1 class="text-5xl font-bold tracking-wider gradient-text">Hi, I'm <span>Orphion</span>.</h1>
+                        <h2 class="text-3xl tracking-wide text-zinc-200">How can I help you today?</h2> <!-- Added text color -->
+                    </div>
+
+                    <!-- Update suggestion boxes grid to 4 columns -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full animate-scale-in max-w-4xl mx-auto">
+                        <button class="suggestion-box bg-[#121212] hover:bg-zinc-800 transition-colors rounded-xl" data-category="innovation">
+                            <p class="text-white px-2"></p>
+                            <i class="ri-lightbulb-line text-yellow-500"></i>
+                        </button>
+                        <button class="suggestion-box bg-[#121212] hover:bg-zinc-800 transition-colors rounded-xl" data-category="learning">
+                            <p class="text-white px-2"></p>
+                            <i class="ri-graduation-cap-line text-blue-500"></i>
+                        </button>
+                        <button class="suggestion-box bg-[#121212] hover:bg-zinc-800 transition-colors rounded-xl" data-category="science">
+                            <p class="text-white px-2"></p>
+                            <i class="ri-earth-line text-amber-500"></i>
+                        </button>
+                        <button class="suggestion-box bg-[#121212] hover:bg-zinc-800 transition-colors rounded-xl" data-category="technology">
+                            <p class="text-white px-2"></p>
+                            <i class="ri-code-line text-purple-500"></i>
+                        </button>
+                    </div>
+
+                    <!-- Update the lightning fast text div -->
+                    <div class="flex items-center justify-center mt-6">
+                        <i class="bi bi-lightning-charge-fill text-2xl text-yellow-400 mr-2"></i>
+                        <span class="text-sm tracking-wider text-zinc-400">Lightning Fast Responses</span>
+                    </div>
+                </div>
+
+                <!-- Chat View -->
+                <div id="chatView" class="hidden flex-1 overflow-y-auto chat-container mb-4">
+                    <div class="flex flex-col w-full px-4 max-w-5xl mx-auto">
+                        <div id="messagesContainer"></div>
+                        <!-- Replace loading bubble with new spinner -->
+                        <div id="loadingBubble" class="loading-container">
+                            <img src="/images/Orphion-icon-png.png" alt="Orphion" class="w-6 h-6 mr-2">
+                            <span id="loadingText" class="text-zinc-300 text-sm animate-flicker mr-2"></span>
+                            <div class="loading-spinner ml-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full page-transition">
+                    <div class="bg-[#121212] rounded-full flex items-center pl-2 pr-4 py-3 gap-2 max-w-3xl mx-auto relative message-input">
+                        <img src="/images/Orphion-icon-png.png" alt="Orphion" class="w-6 h-6">
+                        <input 
+                            type="text" 
+                            placeholder="Message Orphion" 
+                            maxlength="500"
+                            class="bg-transparent flex-1 focus:outline-none text-white placeholder-zinc-600 text-sm"
+                        >
+                        <button 
+                            id="webSearchButton" 
+                            class="text-zinc-600 hover:text-white transition-colors"
+                            title="Toggle web search"
+                        >
+                            <i class="ri-global-line text-lg"></i>
+                        </button>
+                        <!-- Add these image-related elements -->
+                        <div class="relative flex items-center group">
+                            <input 
+                                type="file" 
+                                id="imageInput" 
+                                accept="image/*" 
+                                class="hidden"
+                            >
+                            <div id="imagePreview" class="hidden relative w-7 h-7 mr-2 group">
+                                <img src="" alt="Preview" class="w-full h-full object-cover rounded transition-opacity">
+                                <button id="removeImage" class="absolute inset-0 hidden bg-black bg-opacity-50 items-center justify-center group-hover:flex rounded">
+                                    <i class="ri-close-line text-white"></i>
+                                </button>
+                            </div>
+                            <button id="imageAttachButton" class="text-zinc-600 hover:text-white transition-colors">
+                                <i class="ri-attachment-line text-lg"></i>
+                            </button>
+                        </div>
+                        <button id="sendButton" class="text-zinc-600 hover:text-white transition-colors">
+                            <i class="ri-mic-line text-lg"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-center gap-1.5 mt-2">
+                        <i class="ri-bard-fill text-sm" style="background: linear-gradient(135deg, #A6C1EE 0%, #CAB6FE 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                        <p class="text-zinc-600 text-xs">
+                            AI-Generated Content | For Reference Only
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Add Explore Modal before the settings modal -->
+    <div id="exploreModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div id="exploreContent" class="bg-[#121212] rounded-xl p-6 w-96 transform scale-95 opacity-0 transition-all duration-300 modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-white">Explore Orphion</h3>
+                <button id="closeExplore" class="text-zinc-500 hover:text-white">
+                    <i class="ri-close-line text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <a href="https://drive.google.com/file/d/1-GXFitcuWhhRIpOZm4TUFtoHagBV1AIU/view" class="block w-full">
+                    <div class="border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <i class="ri-smartphone-line text-2xl text-green-500"></i>
+                            <div>
+                                <h4 class="text-white font-medium">Mobile App</h4>
+                                <p class="text-xs text-zinc-400">Use Orphion on your phone</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div id="reviewBtn" class="border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <i class="ri-magic-line text-2xl text-purple-500"></i>
+                        <div>
+                            <h4 class="text-white font-medium">Share Feedback</h4>
+                            <p class="text-xs text-zinc-400">Help us improve Orphion</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="modelSettingsBtn" class="border border-zinc-800 rounded-lg p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <i class="ri-bard-fill text-2xl bard-gradient"></i>
+                        <div>
+                            <h4 class="text-white font-medium">AI Models</h4>
+                            <p class="text-xs text-zinc-400">Choose AI model settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Settings Modal (place near the end of body, before scripts) -->
+    <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div id="settingsContent" class="bg-[#121212] rounded-xl p-6 w-96 transform scale-95 opacity-0 transition-all duration-300 modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-white">AI Models</h3>
+                <button id="closeSettings" class="text-zinc-500 hover:text-white">
+                    <i class="ri-close-line text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4 max-h-[80vh] overflow-y-auto"> <!-- Added max height and scroll -->
+                <!-- Models Section -->
+                <div class="border border-zinc-800 rounded-lg p-4">
+                    <h4 class="text-white text-sm font-semibold mb-3">Current AI Model in use</h4>
+                    <div id="modelSelector" class="relative">
+                        <div id="selectedModel" class="bg-zinc-900 text-white p-2.5 rounded-lg cursor-pointer hover:bg-zinc-800 transition-colors flex justify-between items-center">
+                            <span id="currentModel" class="text-sm">TEJAI-11B-Vision</span>
+                            <i class="ri-arrow-down-s-line text-zinc-500"></i>
+                        </div>
+                        <!-- Update the model dropdown options -->
+                        <div id="modelDropdown" class="absolute w-full mt-1 bg-zinc-900 rounded-lg hidden z-10 border border-zinc-800">
+                            <div class="p-2 cursor-pointer hover:bg-zinc-800 transition-colors border-b border-zinc-800" data-model="llama-3.2-11b-vision-preview">
+                                <div class="flex justify-between items-center mb-0.5">
+                                    <span class="text-sm">Orphion-11B-Vision</span>
+                                    <i class="ri-image-line text-zinc-500"></i>
+                                </div>
+                                <span class="text-xs text-zinc-500 block">Vision capable, standard responses</span>
+                            </div>
+                            <div class="p-2 cursor-pointer hover:bg-zinc-800 transition-colors" data-model="llama-3.2-90b-vision-preview">
+                                <div class="flex justify-between items-center mb-0.5">
+                                    <span class="text-sm">Orphion-90B-Vision</span>
+                                    <i class="ri-image-line text-zinc-500"></i>
+                                </div>
+                                <span class="text-xs text-zinc-500 block">Advanced vision model, enhanced responses</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add empty space after the models section -->
+                <div class="h-24"></div> <!-- This creates padding at the bottom to accommodate the dropdown -->
+            </div>
+        </div>
+    </div>
+    <!-- Remove Web Search Modal -->
+
+    <!-- Remove Deep Thinking Modal -->
+    <!-- Remove Thought Process Modal -->
+
+    <!-- Message Templates -->
+    <template id="userMessageTemplate">
+        <div class="user-message-wrapper opacity-0">
+            <div class="flex-1 flex gap-3 items-start justify-end">
+                <div class="message-content text-right"></div>
+            </div>
+        </div>
+    </template>
+    <template id="aiMessageTemplate">
+        <div class="ai-message-wrapper opacity-0">
+            <img src="/images/Orphion-icon-png.png" alt="Orphion" class="ai-avatar">
+            <div class="flex-1">
+                <div class="message-content"></div>
+                <div class="flex items-center gap-2 mt-2 text-xs text-zinc-500 justify-start">
+                    <div class="flex items-center gap-1">
+                        <i class="bi bi-lightning-charge-fill text-yellow-500"></i>
+                        <span class="response-time"></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button class="like-btn text-zinc-600 hover:text-white transition-colors p-1">
+                            <i class="ri-thumb-up-line text-sm"></i>
+                        </button>
+                        <button class="dislike-btn text-zinc-600 hover:text-white transition-colors p-1">
+                            <i class="ri-thumb-down-line text-sm"></i>
+                        </button>
+                        <button class="regenerate-btn text-zinc-600 hover:text-white transition-colors p-1" title="Regenerate response">
+                            <i class="ri-refresh-line text-sm"></i>
+                        </button>
+                        <button class="copy-btn text-zinc-600 hover:text-white transition-colors p-1" title="Copy response">
+                            <i class="ri-file-copy-line text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Update script tags to use correct paths and order -->
+    <script>
+        // Simple config object since config.js is not needed
+        window.config = {
+            apiKey: 'your-api-key-here',
+            modelName: 'llama-3.2-11b-vision-preview'
+        };
+    </script>
+    <script src="/core.js"></script>
+    <script src="/websearch.js"></script>
+    <script src="/imageattachment.js"></script>
+    <script src="/review.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>

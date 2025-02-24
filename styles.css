@@ -1,0 +1,1299 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Orbitron", sans-serif;
+    background-color: #121212; /* Slightly lighter background */
+    color: #e5e7eb; /* Lighter text color */
+    min-height: 100vh;
+    letter-spacing: 0.03em; /* Add base letter spacing */
+  }
+  
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Side Navigation */
+  .side-nav {
+    width: 60px;
+    background-color: #0a0a0a;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 20px;
+  }
+  
+  .nav-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s;
+  }
+  
+  .nav-btn:hover {
+    color: #fff;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .alien-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+  }
+  
+  .header-text {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 36px;
+    color: #fff;
+  }
+  
+  /* Options Grid */
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 40px 0;
+  }
+  
+  .option-btn {
+    background-color: #121212;
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: floatIn 0.5s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .option-btn:nth-child(1) { animation-delay: 0.1s; }
+  .option-btn:nth-child(2) { animation-delay: 0.2s; }
+  .option-btn:nth-child(3) { animation-delay: 0.3s; }
+  .option-btn:nth-child(4) { animation-delay: 0.4s; }
+  
+  .option-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .option-btn i {
+    font-size: 32px;
+  }
+  
+  .option-btn span {
+    font-size: 20px;
+  }
+
+  .option-btn span:first-of-type {
+    font-size: 16px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .option-btn span:last-of-type {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4); /* Changed to use rgba for transparency */
+    letter-spacing: 0.05em;
+  }
+  
+  /* Message Input */
+  .message-input {
+    width: 100%;
+    max-width: 800px;
+    background-color: #121212;
+    border-radius: 30px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto;
+    animation: pulseGlow 2s infinite;
+  }
+  
+  .input-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .message-input input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.05em; /* Add spacing for input text */
+  }
+  
+  .message-input input::placeholder {
+    color: #666;
+  }
+  
+  .message-input input:focus {
+    outline: none;
+  }
+  
+  .mic-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .mic-btn:hover {
+    color: #fff;
+  }
+  
+  /* Footer Text */
+  .footer-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  
+  /* Message Bubbles */
+  .message-bubble {
+    max-width: 70%;
+    padding: 0.75rem 1.25rem;
+    margin: 0.5rem 0;
+    animation: fadeIn 0.3s ease-in-out;
+    line-height: 1.5;
+    letter-spacing: normal; /* Reset letter spacing */
+    display: inline-block; /* Change to inline-block */
+    white-space: normal;
+    word-break: break-word;
+    vertical-align: top; /* Add vertical alignment */
+  }
+
+  .message-bubble > div {
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em; /* Match parent letter spacing */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .message-bubble strong {
+    font-weight: 600;
+    color: inherit;
+  }
+
+  .message-bubble em {
+    font-style: italic;
+    color: inherit;
+  }
+  
+  .user-message {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    margin-left: auto;
+    color: #ffffff; /* Ensure text is white */
+    display: inline-block;
+    width: auto; /* Allow content to determine width */
+    min-width: min-content; /* Ensure minimum width based on content */
+    max-width: 70%;
+  }
+
+  .user-message .message-content {
+    display: block;
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+    min-width: 0; /* Remove min-width */
+  }
+  
+  .ai-message {
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+    margin-right: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Slightly lighter border */
+    display: inline-block;
+    width: auto;
+    min-width: min-content;
+    letter-spacing: 0.07em; /* Slightly more spacing for AI messages */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Loading Animation */
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+  
+  /* Chat Container */
+  .chat-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+  }
+  
+  #messagesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to start */
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+
+  #messagesContainer > * {
+    width: auto;
+    max-width: 70%;
+    min-width: min-content;
+  }
+
+  #messagesContainer .flex {
+    max-width: 70%;
+  }
+
+  /* Update background gradient */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(74, 222, 128, 0.02), #0a0a0a 60%);
+    pointer-events: none;
+  }
+
+  /* Update the bg-card class */
+  .bg-card {
+    background-color: #121212 !important;
+  }
+
+  /* Enhanced Animations */
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.1); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  }
+
+  @keyframes floatIn {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes scaleInBounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes fadeSlideLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* Add these new animations */
+  @keyframes glow {
+    0%, 100% { 
+        text-shadow: 0 0 0 rgba(234, 179, 8, 0);
+        color: rgb(115, 115, 115);
+    }
+    50% { 
+        text-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
+        color: rgb(234, 179, 8);
+    }
+  }
+
+  @keyframes cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  .animate-cursor {
+    animation: cursor 0.8s ease-in-out infinite;
+  }
+
+  /* Apply animations to elements */
+  .sidebar-btn {
+    animation: fadeSlideLeft 0.3s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .sidebar-btn:hover i {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }
+
+  /* Improve existing transitions */
+  .transition-all {
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Add hover effect to buttons */
+  button:not(:disabled):active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+  }
+
+  /* Enhanced loading spinner */
+  .loading-spinner {
+    animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Update sidebar text */
+  .sidebar-text {
+    letter-spacing: 0.05em; /* Add spacing for sidebar text */
+  }
+
+  /* Replace old animations with these new ones */
+  @keyframes lightningGlow {
+    0%, 100% {
+        color: #fcd34d;
+        text-shadow: 0 0 10px #fcd34d;
+    }
+    50% {
+        color: #f59e0b;
+        text-shadow: 0 0 20px #f59e0b;
+    }
+  }
+
+  @keyframes textFlicker {
+    0%, 100% {
+        opacity: 1;
+        color: rgb(115, 115, 115);
+    }
+    95% {
+        opacity: 1;
+        color: rgb(115, 115, 115);
+    }
+    96% {
+        opacity: 0.8;
+        color: rgb(90, 90, 90);
+    }
+    97% {
+        opacity: 1;
+        color: rgb(115, 115, 115);
+    }
+  }
+
+  .lightning-glow {
+    font-size: 1.5rem;
+    animation: lightningGlow 2s ease-in-out infinite;
+  }
+
+  .text-flicker {
+    animation: textFlicker 5s linear infinite;
+  }
+
+  /* Add this new glow effect for the icon */
+  .glow-icon {
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    animation: iconGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes iconGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+  }
+
+  /* Add enhanced glow effect */
+  .glow-effect {
+    position: relative;
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+    animation: iconPulse 2s ease-in-out infinite;
+  }
+
+  .glow-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes iconPulse {
+    0%, 100% {
+        text-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+        color: #f59e0b;
+    }
+    50% {
+        text-shadow: 0 0 25px rgba(245, 158, 11, 1);
+        color: #fbbf24;
+    }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+
+  /* Update Sidebar Animations */
+  #sidebar {
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    backdrop-filter: blur(10px);
+  }
+
+  .sidebar-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease-out;
+    pointer-events: none;
+  }
+
+  .sidebar-btn:hover::after {
+    transform: translate(-50%, -50%) scale(2);
+  }
+
+  .sidebar-text {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  #sidebar.w-64 .sidebar-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .sidebar-divider {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform-origin: left;
+  }
+
+  #sidebar:not(.w-64) .sidebar-divider {
+    transform: scaleX(0);
+  }
+
+  /* Add hover effect for icons */
+  .sidebar-btn i {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-btn:hover i {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .chat-history-item {
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .chat-history-item:hover .delete-chat-btn {
+    opacity: 1;
+  }
+
+  .delete-chat-btn {
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  /* Chat History Styles */
+  #chatHistory {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: 8px;
+  }
+
+  #chatHistory::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #chatHistory::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #chatHistory::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+
+  .chat-history-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    gap: 12px;
+  }
+
+  .chat-history-item i.ri-message-2-line {
+    flex-shrink: 0;
+  }
+
+  .chat-history-item .chat-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 4px;
+  }
+
+  .chat-history-item .delete-chat-btn {
+    opacity: 0;
+    transition: opacity 0.2s ease, color 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  .chat-history-item:hover .delete-chat-btn {
+    opacity: 1;
+  }
+
+  .chat-history-item .delete-chat-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+  /* Message Container */
+  #messagesContainer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Message Wrapper */
+  .message-wrapper {
+    width: 100%;
+    display: flex;
+    margin: 0.5rem 0;
+    min-width: min-content;
+  }
+
+  .user-message-wrapper {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .ai-message-wrapper {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  /* Message Bubbles */
+  .message-bubble {
+    padding: 0.75rem 1.25rem;
+    border-radius: 1.25rem;
+    max-width: 70%;
+    word-break: break-word;
+  }
+
+  .user-message {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    align-self: flex-end;
+    text-align: right;
+    color: white;
+    display: inline-block;
+  }
+
+  .ai-message {
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+    margin-right: auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Message Content */
+  .message-content {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: pre-line; /* Change to pre-line */
+    word-wrap: break-word;
+    word-break: break-word;
+    letter-spacing: normal;
+    display: inline; /* Change to inline */
+    text-align: right;
+  }
+
+  /* Message Content Specific */
+  .user-message .message-content,
+  .ai-message .message-content {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .user-message .message-content {
+    text-align: right;
+    display: inline-block;
+    width: auto;
+    min-width: 100%;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Message Bubbles - Fixed Layout */
+.message-bubble {
+    max-width: 70%;
+    padding: 0.75rem 1.25rem;
+    margin: 0.5rem 0;
+    animation: fadeIn 0.3s ease-in-out;
+    line-height: 1.5;
+    letter-spacing: 0;
+    display: block;
+    white-space: pre-wrap;
+    word-break: normal;
+    word-wrap: break-word;
+}
+
+/* User Messages - Right Align */
+.user-message {
+  background-color: #2563eb;
+  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+  color: white;
+  display: inline-block;
+  width: auto;
+  min-width: min-content;
+  max-width: 70%;
+  margin-left: auto; /* Ensures right alignment */
+  text-align: left; /* Keep text aligned inside */
+}
+
+.user-message .message-content {
+    display: inline;
+    white-space: normal;
+    word-break: normal;
+    word-wrap: break-word;
+    text-align: right;
+    width: auto;
+    min-width: 0;
+    letter-spacing: normal;
+}
+
+/* Message Container - Fixed Alignment */
+#messagesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Change to stretch */
+    gap: 0.5rem;
+    padding: 1rem 0;
+}
+
+.message-content {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+    letter-spacing: 0;
+    display: inline;
+}
+
+/* Add user message wrapper styles to match AI message wrapper */
+.user-message-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    justify-content: flex-end; /* Align to right */
+}
+
+.user-message-wrapper .message-content {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    color: white;
+    max-width: 70%;
+    display: inline-block;
+    text-align: right;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* User Message Wrapper - Fixed Right Alignment */
+.user-message-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0.5rem 0;
+    margin-left: auto; /* Add this */
+}
+
+.user-message-wrapper .message-content {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    color: white;
+    max-width: 70%;
+    display: block; /* Change to block */
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-left: auto; /* Add this */
+}
+
+/* Ensure messages container allows full width */
+#messagesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    background-color: #0a0a0a;
+}
+
+/* Message Wrappers */
+.message-wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.ai-message-wrapper {
+    justify-content: flex-start;
+}
+
+.user-message-wrapper {
+    justify-content: flex-end;
+}
+
+/* Message Bubbles */
+.message-content {
+    max-width: 70%;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ai-message-wrapper .message-content {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-right: auto;
+}
+
+.user-message-wrapper .message-content {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    color: white;
+    margin-left: auto;
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .message-content {
+        max-width: 85%;
+    }
+    
+    .chat-container {
+        padding: 0.5rem;
+    }
+}
+
+/* Update User Message Styles */
+.user-message-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0.5rem 0;
+}
+
+.user-message-wrapper .message-content {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    color: white;
+    max-width: 70%;
+    text-align: right; /* Change to right alignment */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-left: auto; /* Push content to the right */
+}
+
+/* Messages Container Alignment */
+#messagesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 1rem 0;
+}
+
+/* User Message Wrapper Styles */
+.user-message-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+/* Update user message styles */
+.user-message-wrapper .message-content {
+    background-color: #2563eb;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    color: white;
+    max-width: 70%;
+    display: inline-block;
+    text-align: right; /* Align text to the right */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Adjust icon positioning */
+.message-content .flex.items-center.gap-2.mt-2 {
+    justify-content: flex-end; /* Align icons to the right */
+    margin-top: 0.5rem; /* Add some margin to the top */
+}
+
+/* Ensure icons are properly aligned */
+.message-content .flex.items-center.gap-2.mt-2 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+
+.message-content .flex.items-center.gap-2.mt-2 button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure icons are properly aligned for AI messages */
+.ai-message-wrapper .flex.items-center.gap-2.mt-2 {
+    justify-content: flex-start; /* Align icons to the left */
+    margin-top: 0.5rem; /* Add some margin to the top */
+}
+
+/* Web Search Button Styles */
+#webSearchButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+#webSearchButton i {
+    transition: transform 0.2s ease;
+}
+
+#webSearchButton:hover i {
+    transform: scale(1.1);
+}
+
+#webSearchButton.text-blue-500 {
+    color: #3b82f6;
+}
+
+#webSearchButton.text-blue-500 i {
+    filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.5));
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f2937;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#webSearchButton:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -2.5rem;
+}
+
+/* Enhanced Loading Animation */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.loading-indicator {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Modal Transitions */
+.modal-enter {
+    animation: modalEnter 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalEnter {
+    from { transform: scale(0.95) translateY(10px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Floating Elements Animation */
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Enhanced Button States */
+.button-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.button-hover:active {
+    transform: translateY(0);
+}
+
+/* Glass Morphism */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Modern Card Design */
+.modern-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modern-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Neural Network Background Animation */
+.neural-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.neural-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(59,130,246,0.1) 0%, transparent 50%);
+    animation: neuralPulse 8s linear infinite;
+}
+
+@keyframes neuralPulse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Add to existing animations */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.1); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+/* Deep Think Button */
+#deepThinkButton {
+    transition: all 0.3s ease;
+}
+
+#deepThinkButton.text-purple-500 {
+    color: #a855f7 !important;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+#deepThinkButton:hover {
+    color: #c084fc;
+}
+
+#deepThinkButton.text-purple-500 i {
+    animation: pulseGlow 2s infinite;
+}
+
+/* Add to existing styles */
+#deepThinkToggle.text-purple-500 i {
+    filter: drop-shadow(0 0 3px rgba(168, 85, 247, 0.5));
+}
+
+#deepThinkToggle {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+#deepThinkToggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgb(168, 85, 247);
+    transform: translateY(-50%) scale(0);
+    transition: transform 0.3s ease;
+}
+
+#deepThinkToggle.text-purple-500::after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Add these styles for the Deep-Think toggle */
+#deepThinkToggle.active {
+    background-color: rgb(168, 85, 247); /* purple-500 */
+}
+
+#deepThinkToggle.active .w-4 {
+    transform: translate-x-6;
+    background-color: white;
+}
+
+#deepThinkToggle.active i {
+    color: rgb(168, 85, 247);
+}
+
+#deepThinkToggle:not(.active):hover {
+    background-color: rgb(82, 82, 82);
+}
+
+#deepThinkToggle.active:hover {
+    background-color: rgb(192, 132, 252); /* purple-400 */
+}
+
+/* Add animation for smooth toggle transition */
+#deepThinkToggle span {
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Replace the toggle switch styles with button styles */
+#deepThinkToggle {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#deepThinkToggle.active {
+    background-color: rgba(168, 85, 247, 0.2) !important;
+    border: 1px solid rgb(168, 85, 247);
+}
+
+#deepThinkToggle.active i {
+    color: rgb(168, 85, 247);
+    filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
+}
+
+#deepThinkToggle.active span {
+    color: rgb(168, 85, 247);
+}
+
+/* Add ripple effect */
+#deepThinkToggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-out;
+    pointer-events: none;
+}
+
+#deepThinkToggle.active::after {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+}
+
+/* Add pulse animation for active state */
+@keyframes deepThinkPulse {
+    0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(168, 85, 247, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+#deepThinkToggle.active {
+    animation: deepThinkPulse 2s infinite;
+}
+
+/* Replace Deep-Think button styles */
+#deepThinkToggle {
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+#deepThinkToggle.text-blue-500 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+#deepThinkToggle.text-blue-500 i,
+#deepThinkToggle.text-blue-500 span {
+    color: #3b82f6 !important;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+#deepThinkToggle:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
