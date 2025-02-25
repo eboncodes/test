@@ -734,8 +734,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({
                     model: modelToUse,
                     messages: processedMessages,
-                    max_tokens: 1024,
-                    temperature: 0.2
+                    max_tokens: 512,
+                    temperature: 0.1
                 })
             });
 
